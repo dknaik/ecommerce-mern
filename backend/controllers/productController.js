@@ -3,7 +3,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors=require('../middleware/catchAsyncError')
 //Create Product --Admin
 const createProduct=catchAsyncErrors(async(req,res,next)=>{
-  
+  req.body.user=req.user.id
  console.log("reqbody", req.body);
  const product = await Product.create(req.body);
  res.status(201).json({
@@ -23,6 +23,7 @@ const createProduct=catchAsyncErrors(async(req,res,next)=>{
 
 //Get All prod
 const getAllProducts = catchAsyncErrors(async (req, res) => {
+  console.log("requesttt",req)
   const searchKey = req.query.search;
   let products;
   const queryCopy={...req.query}
